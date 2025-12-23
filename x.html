@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NoteCraft Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav-content">
+        <div class="brand" onclick="switchView('notes')">
+            <i class="ph-fill ph-notebook"></i>
+            <span>NoteCraft</span>
+        </div>
+        
+        <div class="search-wrapper">
+            <div class="search-bar">
+                <i class="ph ph-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Search your thoughts...">
+            </div>
+        </div>
+
+        <div class="nav-actions">
+            <button id="trashBtn" class="btn-icon-nav" title="Trash">
+                <i class="ph-bold ph-trash"></i>
+            </button>
+            
+            <button id="themeBtn" class="btn-icon-nav" title="Dark Mode">
+                <i class="ph-bold ph-moon"></i>
+            </button>
+
+            <div class="settings-btn">
+                <button id="settingsBtn" class="btn-icon-nav" title="Data Options">
+                    <i class="ph-bold ph-gear"></i>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <button class="dropdown-item" id="exportBtn">
+                        <i class="ph-bold ph-download-simple"></i> Export Data
+                    </button>
+                    <label class="dropdown-item" style="cursor: pointer;">
+                        <i class="ph-bold ph-upload-simple"></i> Import Data
+                        <input type="file" id="importInput" accept=".json" style="display: none;">
+                    </label>
+                </div>
+            </div>
+
+            <button id="newNoteBtn" class="btn-primary">
+                <i class="ph-bold ph-plus"></i>
+                <span>New Note</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+    <header class="page-header">
+        <h2 id="pageTitle">Your Notes</h2>
+        <span id="viewBadge" class="view-label hidden">Trash View</span>
+    </header>
+
+    <div id="notesGrid" class="notes-grid"></div>
+
+    <div id="emptyState" class="empty-state hidden">
+        <i class="ph-duotone ph-note-pencil"></i>
+        <h3>No notes here</h3>
+        <p>Your canvas is empty.</p>
+    </div>
+</main>
+
+<div id="noteModal" class="modal">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-card" id="modalCard">
+        
+        <button id="closeFocusBtn"><i class="ph-bold ph-arrows-in"></i> Exit Focus</button>
+
+        <div class="modal-header">
+            <div class="color-picker">
+            </div>
+            
+            <div class="tools">
+                <button id="focusTool" class="tool-btn" title="Focus Mode"><i class="ph-bold ph-corners-out"></i></button>
+                <button id="pinTool" class="tool-btn" title="Pin Note"><i class="ph-fill ph-push-pin"></i></button>
+                <button id="micTool" class="tool-btn" title="Dictate"><i class="ph-bold ph-microphone"></i></button>
+                <button id="closeTool" class="tool-btn"><i class="ph-bold ph-x"></i></button>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div id="viewMode">
+                <h2 id="viewTitle" style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;"></h2>
+                <div id="viewContent" class="view-content"></div>
+            </div>
+            <div id="editMode" class="hidden">
+                <input id="editTitle" class="input-title" placeholder="Untitled">
+                <textarea id="editContent" class="input-content" placeholder="Start typing... (Markdown supported)"></textarea>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <div style="display:flex; gap:12px;">
+                 <button id="deleteAction" class="tool-btn danger"><i class="ph-bold ph-trash"></i></button>
+                 <button id="restoreAction" class="btn-primary hidden">Restore</button>
+            </div>
+            <div style="display:flex; gap:12px;">
+                <button id="editAction" class="tool-btn"><i class="ph-bold ph-pencil-simple"></i></button>
+                <button id="saveAction" class="btn-primary hidden">Save Note</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button id="fabBtn" class="fab"><i class="ph-bold ph-plus"></i></button>
+
+<script src="script.js"></script>
+</body>
+</html>
